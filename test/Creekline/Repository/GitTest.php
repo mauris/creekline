@@ -22,7 +22,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new Git('https://github.com/thephpdeveloper/creekline.git');
-        $this->processor = '\\Creekline\\Repository\\MockProcess';
+        $this->processor = '\\Creekline\\MockProcess';
     }
 
     /**
