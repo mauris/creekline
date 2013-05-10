@@ -88,7 +88,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     {
         $c = new Container();
         $c['branch'] = 'FAIL';
-        $c['processor'] = $this->processor;
+        $c['processor'] = '\\Creekline\\MockFailProcess';
         call_user_func($this->object, $c);
         $this->object->fetch();
     }
