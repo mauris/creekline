@@ -40,9 +40,11 @@ class Composer {
         $cmd = 'php composer.phar install';
         $proc = $this->processor;
         $process = new $proc($cmd);
+        $output = $process->getOutput();
         if ($process->run() !== 0) {
-            throw new \RuntimeException('Failed to install dependencies via Composer. Output: ' . $process->getOutput());
+            throw new \RuntimeException('Failed to install dependencies via Composer. Output: ' . $output);
         }
+        return $this->processOutput($output);
     }
     
     public function update(){
@@ -53,6 +55,19 @@ class Composer {
         if ($process->run() !== 0) {
             throw new \RuntimeException('Failed to update dependencies via Composer. Output: ' . $output);
         }
+        return $this->processOutput($output);
     }
+    
+    protected function processOutput($output){
+        $result = array();
+        $entries = array();
+        $matches = preg_match_all('{\- Installing (.*) \((.*)\)}isU', $output, $entries, PREG_SET_ORDER);
+        if($matches){
+            foreach($entries as $entry){
+                $result[$entry[1]] = $entry[2];
+            }
+        }
+        return $result;
+   }
     
 }
