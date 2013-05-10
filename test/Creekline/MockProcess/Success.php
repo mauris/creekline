@@ -1,7 +1,7 @@
 <?php
-namespace Creekline;
+namespace Creekline\MockProcess;
 
-class MockFailProcess {
+class Success {
     
     private $cmd;
     
@@ -10,7 +10,7 @@ class MockFailProcess {
     }
     
     public function run(){
-        return 1;
+        return 0;
     }
     
     public function getOutput(){

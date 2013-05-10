@@ -1,7 +1,7 @@
 <?php
-namespace Creekline;
+namespace Creekline\MockProcess;
 
-class MockComposerProcess {
+class Composer {
     
     private $cmd;
     

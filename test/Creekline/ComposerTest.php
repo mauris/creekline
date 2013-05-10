@@ -49,7 +49,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testInstall()
     {
         $c = new Container();
-        $c['processor'] = '\\Creekline\\MockComposerProcess';
+        $c['processor'] = '\\Creekline\\MockProcess\\Composer';
         call_user_func($this->object, $c);
         $result = $this->object->install();
         $this->assertEquals(array(
@@ -65,7 +65,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testInstallFail()
     {
         $c = new Container();
-        $c['processor'] = '\\Creekline\\MockFailProcess';
+        $c['processor'] = '\\Creekline\\MockProcess\\Failure';
         call_user_func($this->object, $c);
         $this->object->install();
     }
@@ -76,7 +76,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testUpdate()
     {
         $c = new Container();
-        $c['processor'] = '\\Creekline\\MockComposerProcess';
+        $c['processor'] = '\\Creekline\\MockProcess\\Composer';
         call_user_func($this->object, $c);
         $result = $this->object->update();
         $this->assertEquals(array(
@@ -92,7 +92,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     public function testUpdateFail()
     {
         $c = new Container();
-        $c['processor'] = '\\Creekline\\MockFailProcess';
+        $c['processor'] = '\\Creekline\\MockProcess\\Failure';
         call_user_func($this->object, $c);
         $this->object->update();
     }

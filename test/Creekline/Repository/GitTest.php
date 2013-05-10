@@ -22,7 +22,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->object = new Git('https://github.com/thephpdeveloper/creekline.git');
-        $this->processor = '\\Creekline\\MockProcess';
+        $this->processor = '\\Creekline\\MockProcess\\Success';
     }
 
     /**
@@ -88,7 +88,7 @@ class GitTest extends \PHPUnit_Framework_TestCase
     {
         $c = new Container();
         $c['branch'] = 'FAIL';
-        $c['processor'] = '\\Creekline\\MockFailProcess';
+        $c['processor'] = '\\Creekline\\MockProcess\\Failure';
         call_user_func($this->object, $c);
         $this->object->fetch();
     }
