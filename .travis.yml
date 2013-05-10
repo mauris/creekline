@@ -13,4 +13,4 @@ before_script:
   - composer install --prefer-source
 script: phpunit -c phpunit.xml.dist
 after_script:
-  - "wget --quiet http://mauris.sg/bin/pdc.phar | php -- src"
+  - "wget --quiet http://mauris.sg/bin/pdc.phar && php pdc.phar src"
