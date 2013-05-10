@@ -10,6 +10,8 @@
 
 namespace Creekline;
 
+use Packfire\FuelBlade\IConsumer;
+
 /**
  * Composer class
  *
@@ -21,7 +23,9 @@ namespace Creekline;
  * @package Creekline
  * @since 1.0.0
  */
-class Composer {
+class Composer implements IConsumer {
+    
+    protected $processor = '\\Symfony\\Component\\Process\\Process';
     
     public function download(){
         $cmd = 'php -r "eval(\'?>\'.file_get_contents(\'https://getcomposer.org/installer\'));"';
@@ -69,4 +73,10 @@ class Composer {
         return $result;
    }
     
+   public function __invoke($c) {
+        if(isset($c['processor'])){
+            $this->processor = $c['processor'];
+        }
+   }
+   
 }
