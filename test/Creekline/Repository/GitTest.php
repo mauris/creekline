@@ -34,6 +34,30 @@ class GitTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Creekline\Repository\Git::__invoke
+     */
+    public function testInvoke()
+    {
+        $c = new Container();
+        $c['processor'] = $this->processor;
+        $c['url'] = 'http://hexhex.dev/example.git';
+        $c['branch'] = '2.1.5';
+        call_user_func($this->object, $c);
+        
+        $processor = new \ReflectionProperty(get_class($this->object), 'processor');
+        $processor->setAccessible(true);
+        $this->assertEquals($this->processor, $processor->getValue($this->object));
+        
+        $branch = new \ReflectionProperty(get_class($this->object), 'branch');
+        $branch->setAccessible(true);
+        $this->assertEquals($c['branch'], $branch->getValue($this->object));
+        
+        $url = new \ReflectionProperty(get_class($this->object), 'url');
+        $url->setAccessible(true);
+        $this->assertEquals($c['url'], $url->getValue($this->object));
+    }
+
+    /**
      * @covers Creekline\Repository\Git::fetch
      */
     public function testFetch()
