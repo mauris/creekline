@@ -45,12 +45,13 @@ class Composer {
         }
     }
     
-    public function upgrade(){
-        $cmd = 'php composer.phar upgrade';
+    public function update(){
+        $cmd = 'php composer.phar update';
         $proc = $this->processor;
         $process = new $proc($cmd);
+        $output = $process->getOutput();
         if ($process->run() !== 0) {
-            throw new \RuntimeException('Failed to install dependencies via Composer. Output: ' . $process->getOutput());
+            throw new \RuntimeException('Failed to update dependencies via Composer. Output: ' . $output);
         }
     }
     
