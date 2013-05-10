@@ -10,6 +10,8 @@
 
 namespace Creekline\Repository;
 
+use Packfire\FuelBlade\IConsumer;
+
 /**
  * Git class
  *
@@ -21,16 +23,31 @@ namespace Creekline\Repository;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class Git extends UrlRepository {
+class Git extends UrlRepository implements IConsumer {
     
     protected $url;
+    
+    protected $branch = 'master';
     
     public function __construct($url) {
         $this->url = $url;
     }
 
     public function fetch() {
-        
+        $cmd = 'git init && git remote add origin "' . $this->url . '" && git pull origin "' . $this->branch . '"';
+        $process = new Process($cmd);
+        if ($process->run() !== 0) {
+            throw new \RuntimeException('Failed to fetch from "'.$this->url.'". Output: ' . $process->getOutput());
+        }
+    }
+    
+    public function __invoke($c) {
+        if(isset($c['url'])){
+            $this->url = $c['url'];
+        }
+        if(isset($c['branch'])){
+            $this->url = $c['branch'];
+        }
     }
     
 }
