@@ -61,6 +61,12 @@ class Composer implements IConsumer {
         return $this->processOutput($output);
     }
     
+   /**
+    * Process Composer output into an array of dependencies and versions
+    * @param string $output The Composer output to process
+    * @since 1.0.0
+    * @codeCoverageIgnore
+    */
     protected function processOutput($output){
         $result = array();
         $entries = array();
@@ -72,7 +78,13 @@ class Composer implements IConsumer {
         }
         return $result;
    }
-    
+   
+   /**
+    * FuelBlade consumer method
+    * @param \Packfire\FuelBlade\IContainer $c The container to get dependencies
+    * @since 1.0.0
+    * @codeCoverageIgnore
+    */
    public function __invoke($c) {
         if(isset($c['processor'])){
             $this->processor = $c['processor'];

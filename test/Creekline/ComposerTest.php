@@ -16,6 +16,7 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     * @covers Creekline\Composer::__invoke
      */
     protected function setUp()
     {
@@ -44,14 +45,29 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Creekline\Composer::install
-     * @todo   Implement testInstall().
      */
     public function testInstall()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockComposerProcess';
+        call_user_func($this->object, $c);
+        $result = $this->object->install();
+        $this->assertEquals(array(
+            'symfony/process' => 'v2.2.1',
+            'symfony/finder' => 'v2.2.1'
+            ), $result);
+    }
+
+    /**
+     * @covers Creekline\Composer::install
+     * @expectedException \RuntimeException
+     */
+    public function testInstallFail()
+    {
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockFailProcess';
+        call_user_func($this->object, $c);
+        $this->object->install();
     }
 
     /**
@@ -70,14 +86,14 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Creekline\Composer::__invoke
-     * @todo   Implement test__invoke().
+     * @covers Creekline\Composer::update
+     * @expectedException \RuntimeException
      */
-    public function test__invoke()
+    public function testUpdateFail()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockFailProcess';
+        call_user_func($this->object, $c);
+        $this->object->update();
     }
 }
