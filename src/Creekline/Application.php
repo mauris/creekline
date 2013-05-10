@@ -23,7 +23,11 @@ namespace Creekline;
  */
 class Application {
     
-    public function run($args){
+    public function __construct($args){
+        
+    }
+    
+    public function run(){
         
     }
     
