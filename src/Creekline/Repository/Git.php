@@ -29,15 +29,18 @@ class Git extends UrlRepository implements IConsumer {
     
     protected $branch = 'master';
     
+    protected $processor = '\\Symfony\\Component\\Process\\Process';
+    
     public function __construct($url) {
         $this->url = $url;
     }
 
     public function fetch() {
         $cmd = 'git init && git remote add origin "' . $this->url . '" && git pull origin "' . $this->branch . '"';
-        $process = new Process($cmd);
+        $proc = $this->processor;
+        $process = new $proc($cmd);
         if ($process->run() !== 0) {
-            throw new \RuntimeException('Failed to fetch from "'.$this->url.'". Output: ' . $process->getOutput());
+            throw new \RuntimeException('Failed to fetch from "' . $this->url . '". Output: ' . $process->getOutput());
         }
     }
     
@@ -46,7 +49,10 @@ class Git extends UrlRepository implements IConsumer {
             $this->url = $c['url'];
         }
         if(isset($c['branch'])){
-            $this->url = $c['branch'];
+            $this->branch = $c['branch'];
+        }
+        if(isset($c['processor'])){
+            $this->processor = $c['processor'];
         }
     }
     
