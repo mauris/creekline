@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "efb389cf02e8755548199fef65af6825",
+    "hash": "f9b958d1f55b791459fb1b22423ba5a9",
     "packages": [
         {
             "name": "mauris/yaml",
@@ -53,6 +53,50 @@
                 "yaml"
             ],
             "time": "2013-05-02 11:55:31"
+        },
+        {
+            "name": "packfire/fuelblade",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/packfire/fuelblade.git",
+                "reference": "1.0.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/packfire/fuelblade/zipball/1.0.0",
+                "reference": "1.0.0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Packfire\\FuelBlade": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sam-Mauris Yong",
+                    "email": "mauris@hotmail.sg",
+                    "homepage": "http://mauris.sg/",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Packfire FuelBlade - Dependency Injection / IoC library for PHP",
+            "homepage": "http://mauris.sg/packfire/",
+            "keywords": [
+                "dependency",
+                "di",
+                "ioc"
+            ],
+            "time": "2013-02-28 04:09:13"
         },
         {
             "name": "packfire/options",
