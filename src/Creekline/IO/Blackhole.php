@@ -10,8 +10,6 @@
 
 namespace Creekline\IO;
 
-use Clio\Console;
-
 /**
  * Blackhole class
  *
