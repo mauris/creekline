@@ -25,7 +25,7 @@ interface IOInterface {
     
     public function write($message, $newline = true);
     
-    public function overwrite($message, $newline = true);
+    public function overwrite($message, $newline = true, $size = null);
     
     public function read();
     
