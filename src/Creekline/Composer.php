@@ -27,6 +27,19 @@ class Composer implements IConsumer {
     
     protected $processor = '\\Symfony\\Component\\Process\\Process';
     
+    protected $command = 'php composer.phar';
+    
+    public function detect(){
+        $cmd = 'composer --version';
+        $proc = $this->processor;
+        $process = new $proc($cmd);
+        $result = $process->run() === 0 && substr($process->getOutput(), 0, 8) == 'Composer';
+        if($result){
+            $this->command = 'composer';
+        }
+        return $result;
+    }
+    
     public function download(){
         $cache = sys_get_temp_dir() . '/composer.phar';
         if(file_exists($cache)){
@@ -47,7 +60,7 @@ class Composer implements IConsumer {
     }
     
     public function install(){
-        $cmd = 'php composer.phar install';
+        $cmd = $this->command . ' install';
         $proc = $this->processor;
         $process = new $proc($cmd);
         $output = $process->getOutput();
@@ -58,7 +71,7 @@ class Composer implements IConsumer {
     }
     
     public function update(){
-        $cmd = 'php composer.phar update';
+        $cmd = $this->command . ' update';
         $proc = $this->processor;
         $process = new $proc($cmd);
         $output = $process->getOutput();
