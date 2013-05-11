@@ -37,7 +37,39 @@ class PackageManager {
     }
     
     public function run(RepositoryInterface $repository){
+        $this->io->write('Preparing for ' . $repository->identifier(), false);
         
+        $cwd = getcwd();
+        $folder = sys_get_temp_dir() . '/' . FolderUtility::randomFolderName();
+        mkdir($folder);
+        chdir($folder);
+        
+        $this->io->overwrite('Downloading ' . $repository->identifier(), false);
+        $repository->fetch();
+        
+        $this->io->overwrite('Downloading Composer ... ', false);
+        $composer = new Composer();
+        $result = $composer->detect();
+        if(!$result){
+            $composer->download();
+        }
+        $this->io->overwrite('Installing project dependencies ... ', false);
+        $components = $composer->install();
+        
+        $this->io->overwrite('Checking ' . $repository->identifier() . ' ... ', false);        
+        $upgrades = $composer->update();
+        
+        chdir($cwd);
+        FolderUtility::clearFolder($folder);
+        
+        $this->io->write("Done");
+        foreach($components as $name => $version){
+            $this->io->write('    ' . $name . ' ' . $version, false);
+            if(isset($upgrades[$name])){
+                $this->io->write(' => ' . $upgrades[$name], false);
+            }
+            $this->io->write('');
+        }
         
     }
     
