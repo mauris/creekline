@@ -36,10 +36,12 @@ class Console implements IOInterface {
     }
 
     public function overwrite($message, $newline = true, $size = null) {
-        if(!$size){
-            $size = strlen($this->lastMessage);
+        $size = $this->lastMessage;
+        $this->write("\x0D", false);
+        if($size && $size > strlen($message)){
+            $this->write(str_repeat(' ', $size), false);
+            $this->write("\x0D", false);
         }
-        $this->write(str_repeat("\x08", $size), false);
         $this->write($message, $newline);
     }
 
@@ -48,8 +50,8 @@ class Console implements IOInterface {
     }
 
     public function write($message, $newline = true) {
-        $this->lastMessage = $message . ($newline ? "\n": '');
-        Clio::stdout($this->lastMessage, true);
+        $message = $message . ($newline ? "\n": '');
+        $this->lastMessage = Clio::stdout($message);
     }
     
 }
