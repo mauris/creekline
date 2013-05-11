@@ -10,6 +10,8 @@
 
 namespace Creekline;
 
+use Creekline\IO\Console;
+
 /**
  * Application class
  *
@@ -23,8 +25,15 @@ namespace Creekline;
  */
 class Application {
     
+    /**
+     *
+     * @var \Creekline\IO\IOInterface
+     * @since 1.0.0
+     */
+    protected $io;
+    
     public function __construct($args){
-        
+        $this->io = new Console;
     }
     
     public function run(){
