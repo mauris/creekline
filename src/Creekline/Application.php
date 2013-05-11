@@ -53,7 +53,7 @@ class Application {
         
         $container['options']->add('c|config=', function($value)use(&$act, $container){
             $act = 'manager';
-            $container['config'] = new Config($value);
+            $container['config'] = Config::load($value);
         }, 'Set the configuration');
         
         $container['options']->add('h|help', function()use(&$act){
