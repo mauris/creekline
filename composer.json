@@ -21,8 +21,7 @@
         "clio/clio": "0.1.*",
         "packfire/config": "1.0.*",
         "packfire/options": "1.1.*",
-        "packfire/fuelblade": "1.0.*",
-        "mauris/yaml": "1.0.*"
+        "packfire/fuelblade": "1.0.*"
     },
     "autoload": {
         "psr-0": {"Creekline\\": "src/"}
