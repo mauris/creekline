@@ -28,11 +28,11 @@ class Console implements IOInterface {
     private $lastMessage;
     
     public function ask($question, $responses) {
-        Console::select($question, $responses);
+        return Console::select($question, $responses);
     }
 
     public function confirm($question) {
-        Console::confirm($question);
+        return Console::confirm($question);
     }
 
     public function overwrite($message, $newline = true, $size = null) {
