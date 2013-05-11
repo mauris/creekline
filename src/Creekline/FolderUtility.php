@@ -32,7 +32,7 @@ class FolderUtility {
     }
     
     public static function clearFolder($folder){
-        if (!is_dir($folder) || is_link($folder)) return unlink($folder); 
+        if (!is_dir($folder) || is_link($folder)) return @unlink($folder); 
         foreach (scandir($folder) as $file) { 
             if ($file == '.' || $file == '..') continue; 
             if (!self::clearFolder($folder . '/' . $file)) { 
@@ -40,7 +40,7 @@ class FolderUtility {
                 if (!self::clearFolder($folder . '/' . $file)) return false; 
             }; 
         } 
-        return rmdir($folder); 
+        return @rmdir($folder); 
     }
     
 }
