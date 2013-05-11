@@ -37,7 +37,7 @@ class Application {
     }
     
     public function run(){
-        
+        $manager = new PackageManager($this->io);
     }
     
 }
