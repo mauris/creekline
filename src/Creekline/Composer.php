@@ -28,14 +28,21 @@ class Composer implements IConsumer {
     protected $processor = '\\Symfony\\Component\\Process\\Process';
     
     public function download(){
-        $cmd = 'php -r "eval(\'?>\'.file_get_contents(\'https://getcomposer.org/installer\'));"';
-        $proc = $this->processor;
-        $process = new $proc($cmd);
-        if ($process->run() !== 0) {
-            throw new \RuntimeException('Failed to download Composer. Output: ' . $process->getOutput());
-        }
-        if(!is_file('composer.phar')){
-            throw new \RuntimeException('Failed to download Composer: "composer.phar" still not found. Output: ' . $process->getOutput());
+        $cache = sys_get_temp_dir() . '/composer.phar';
+        if(file_exists($cache)){
+            copy($cache, 'composer.phar');
+        }else{
+            $cmd = 'php -r "eval(\'?>\'.file_get_contents(\'https://getcomposer.org/installer\'));"';
+            $proc = $this->processor;
+            $process = new $proc($cmd);
+            if ($process->run() !== 0) {
+                throw new \RuntimeException('Failed to download Composer. Output: ' . $process->getOutput());
+            }
+            if(!is_file('composer.phar')){
+                throw new \RuntimeException('Failed to download Composer: "composer.phar" still not found. Output: ' . $process->getOutput());
+            }
+            //caching
+            copy('composer.phar', $cache);
         }
     }
     
