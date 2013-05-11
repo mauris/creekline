@@ -27,15 +27,26 @@ use Creekline\Repository\RepositoryInterface;
 class PackageManager {
     
     /**
-     *
+     * The IO channel to read/write to
      * @var \Creekline\IO\IOInterface
+     * @since 1.0.0
      */
     private $io;
     
+    /**
+     * Create a new PackageManager
+     * @param \Creekline\IO\IOInterface $io The IO interface to input/output to
+     * @since 1.0.0
+     */
     public function __construct(IOInterface $io){
         $this->io = $io;
     }
     
+    /**
+     * Perform update checking for a repository
+     * @param \Creekline\Repository\RepositoryInterface $repository The repository to check
+     * @since 1.0.0
+     */
     public function run(RepositoryInterface $repository){
         $this->io->write('Preparing for ' . $repository->identifier(), false);
         
