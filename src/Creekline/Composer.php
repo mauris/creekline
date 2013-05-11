@@ -63,8 +63,9 @@ class Composer implements IConsumer {
         $cmd = $this->command . ' install';
         $proc = $this->processor;
         $process = new $proc($cmd);
+        $errCode = $process->run();
         $output = $process->getOutput();
-        if ($process->run() !== 0) {
+        if ($errCode !== 0) {
             throw new \RuntimeException('Failed to install dependencies via Composer. Output: ' . $output);
         }
         return $this->processOutput($output);
@@ -74,8 +75,9 @@ class Composer implements IConsumer {
         $cmd = $this->command . ' update';
         $proc = $this->processor;
         $process = new $proc($cmd);
+        $errCode = $process->run();
         $output = $process->getOutput();
-        if ($process->run() !== 0) {
+        if ($errCode !== 0) {
             throw new \RuntimeException('Failed to update dependencies via Composer. Output: ' . $output);
         }
         return $this->processOutput($output);
