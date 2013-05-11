@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "3d84524347a44b10b89eea6118387e9f",
+    "hash": "738c3bfb02346661250a67dfdbe1a3e7",
     "packages": [
         {
             "name": "clio/clio",
@@ -94,6 +94,43 @@
                 "yaml"
             ],
             "time": "2013-05-02 11:55:31"
+        },
+        {
+            "name": "packfire/config",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/packfire/config.git",
+                "reference": "1.0.1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/packfire/config/zipball/1.0.1",
+                "reference": "1.0.1",
+                "shasum": ""
+            },
+            "require": {
+                "mauris/yaml": "1.0.*",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Packfire\\Config": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Sam-Mauris Yong",
+                    "email": "sam@mauris.sg"
+                }
+            ],
+            "description": "A config driver that is easy to use",
+            "time": "2013-05-02 12:22:46"
         },
         {
             "name": "packfire/fuelblade",

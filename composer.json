@@ -19,6 +19,7 @@
         "php": ">=5.3.0",
         "symfony/process": "2.2.*",
         "clio/clio": "0.1.*",
+        "packfire/config": "1.0.*",
         "packfire/options": "1.1.*",
         "packfire/fuelblade": "1.0.*",
         "mauris/yaml": "1.0.*"
