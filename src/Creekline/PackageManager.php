@@ -10,6 +10,9 @@
 
 namespace Creekline;
 
+use Creekline\IO\IOInterface;
+use Creekline\Repository\RepositoryInterface;
+
 /**
  * PackageManager class
  *
@@ -28,6 +31,17 @@ class PackageManager {
      * @var \Creekline\Repository\RepositoryInterface
      */
     private $repository;
+    
+    /**
+     *
+     * @var \Creekline\IO\IOInterface
+     */
+    private $io;
+    
+    public function __construct(RepositoryInterface $repository, IOInterface $io){
+        $this->repository = $repository;
+        $this->io = $io;
+    }
     
         
     public function __construct($repository){
