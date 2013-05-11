@@ -33,14 +33,42 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Creekline\Composer::download
-     * @todo   Implement testDownload().
+     * @expectedException \RuntimeException
+     */
+    public function testDownloadFail()
+    {
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockProcess\\Failure';
+        call_user_func($this->object, $c);
+        $this->object->download();
+    }
+
+    /**
+     * @covers Creekline\Composer::download
+     * @expectedException \RuntimeException
+     */
+    public function testDownloadFileMissing()
+    {
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockProcess\\Success';
+        call_user_func($this->object, $c);
+        $this->object->download();
+    }
+
+    /**
+     * @covers Creekline\Composer::download
      */
     public function testDownload()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $cwd = getcwd();
+        chdir(sys_get_temp_dir());
+        file_put_contents('composer.phar', '<?php ');
+        $c = new Container();
+        $c['processor'] = '\\Creekline\\MockProcess\\Success';
+        call_user_func($this->object, $c);
+        $this->object->download();
+        unlink('composer.phar');
+        chdir($cwd);
     }
 
     /**
