@@ -11,6 +11,8 @@
 namespace Creekline;
 
 use Creekline\IO\Console;
+use Packfire\Options\OptionSet;
+use Packfire\FuelBlade\Container;
 
 /**
  * Application class
@@ -25,19 +27,47 @@ use Creekline\IO\Console;
  */
 class Application {
     
-    /**
-     *
-     * @var \Creekline\IO\IOInterface
-     * @since 1.0.0
-     */
-    protected $io;
+    protected $container;
+    
+    protected $args;
     
     public function __construct($args){
-        $this->io = new Console;
+        $container = new Container();
+        $this->container = $container;
+        
+        $io = new Console;
+        $this->container['io'] = $io;
+        
+        $io->write("Creekline composer dependencies checker\n");
+        
+        $options = new OptionSet();
+        $container['options'] = $options;
+        
+        $this->args = $args;
     }
     
     public function run(){
-        $manager = new PackageManager($this->io);
+        $container = $this->container;
+        $act = 'help';
+        
+        $container['options']->add('c|config=', function()use(&$act){
+            $act = 'manager';
+        }, 'Set the configuration');
+        
+        $container['options']->add('h|help', function()use(&$act){
+            $act = 'help';
+        }, 'Shows this help message');
+        
+        $container['options']->parse($this->args);
+        
+        switch($act){
+            case 'manager':
+                break;
+            case 'help':
+            default:
+                $container['io']->write($container['options']->help());
+                break;
+        }
     }
     
 }
