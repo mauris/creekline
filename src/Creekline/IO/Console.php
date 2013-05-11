@@ -10,7 +10,7 @@
 
 namespace Creekline\IO;
 
-use Clio\Console;
+use Clio\Console as Clio;
 
 /**
  * Console class
@@ -28,11 +28,11 @@ class Console implements IOInterface {
     private $lastMessage;
     
     public function ask($question, $responses) {
-        return Console::select($question, $responses);
+        return Clio::select($question, $responses);
     }
 
     public function confirm($question) {
-        return Console::confirm($question);
+        return Clio::confirm($question);
     }
 
     public function overwrite($message, $newline = true, $size = null) {
@@ -41,12 +41,12 @@ class Console implements IOInterface {
     }
 
     public function read() {
-        return Console::input();
+        return Clio::input();
     }
 
     public function write($message, $newline = true) {
         $this->lastMessage = $message . ($newline ? "\n": '');
-        Console::output($this->lastMessage);
+        Clio::output($this->lastMessage);
     }
     
 }
