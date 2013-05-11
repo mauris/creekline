@@ -27,13 +27,18 @@ class Config {
     
     private $projects;
     
+    /**
+     * Create a new Config
+     * @param \Packfire\Config\IConfig $data The configuration
+     * @since 1.0.0
+     */
     public function __construct($data){
         $this->sort($data);
     }
     
     protected function sort($data){
-        if(isset($data['projects'])){
-            $this->projects = $data['projects'];
+        if($data->get('projects')){
+            $this->projects = $data->get('projects');
         }
     }
     
