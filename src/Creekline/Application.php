@@ -13,6 +13,7 @@ namespace Creekline;
 use Creekline\IO\Console;
 use Packfire\Options\OptionSet;
 use Packfire\FuelBlade\Container;
+use Creekline\Config\Config;
 
 /**
  * Application class
@@ -50,8 +51,9 @@ class Application {
         $container = $this->container;
         $act = 'help';
         
-        $container['options']->add('c|config=', function()use(&$act){
+        $container['options']->add('c|config=', function($value)use(&$act, $container){
             $act = 'manager';
+            $container['config'] = new Config($value);
         }, 'Set the configuration');
         
         $container['options']->add('h|help', function()use(&$act){
