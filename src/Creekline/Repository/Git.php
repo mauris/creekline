@@ -25,14 +25,16 @@ use Packfire\FuelBlade\IConsumer;
  */
 class Git extends UrlRepository implements IConsumer {
     
-    protected $url;
-    
     protected $branch = 'master';
     
     protected $processor = '\\Symfony\\Component\\Process\\Process';
     
     public function __construct($url) {
         $this->url = $url;
+    }
+    
+    public function identifier(){
+        return $this->url;
     }
 
     public function fetch() {

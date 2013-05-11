@@ -23,6 +23,8 @@ namespace Creekline\Repository;
  */
 abstract class UrlRepository implements RepositoryInterface {
     
+    protected $url;
+    
     public abstract function __construct($url);
 
 }

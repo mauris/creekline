@@ -23,6 +23,8 @@ namespace Creekline\Repository;
  */
 interface RepositoryInterface {
     
+    public function identifier();
+    
     public function fetch();
     
 }
