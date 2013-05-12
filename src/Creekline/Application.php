@@ -51,6 +51,10 @@ class Application {
         $container = $this->container;
         $act = 'help';
         
+        $container['options']->addIndex(1, function($value)use(&$act, $container){
+            $act = 'skip';
+        }, '[Optional] Sets the repository to check');
+        
         $container['options']->add('c|config=', function($value)use(&$act, $container){
             $act = 'manager';
             $container['config'] = Config::load($value);
@@ -63,6 +67,8 @@ class Application {
         $container['options']->parse($this->args);
         
         switch($act){
+            case 'skip':
+                break;
             case 'manager':
                 break;
             case 'help':
