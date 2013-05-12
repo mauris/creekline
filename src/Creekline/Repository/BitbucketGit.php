@@ -11,9 +11,9 @@
 namespace Creekline\Repository;
 
 /**
- * Github class
+ * BitbucketGit class
  *
- * A Github repository
+ * A BitBucket Git repository
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2013, Sam-Mauris Yong
@@ -21,12 +21,12 @@ namespace Creekline\Repository;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class Github extends Git {
+class BitbucketGit extends Git {
     
     public function __construct($url) {
-        if(preg_match('{^[a-z0-9\-]+\/[a-z0-9\-]+$}is', $url)){
-            $url = 'git@github.com:' . $url . '.git';
-        }elseif(preg_match('{^https{0,1}://(www\.){0,1}github\.com/[a-z0-9\-\.]+/[a-z0-9\-\.]+(?<!\.git)$}is', $url)){
+        if(preg_match('{^[a-z0-9\-\.]+\/[a-z0-9\-\.]+$}is', $url)){
+            $url = 'git@bitbucket.org:' . $url . '.git';
+        }elseif(preg_match('{^https{0,1}://.*bitbucket\.org/[a-z0-9\-\.]+/[a-z0-9\-\.]+(?<!\.git)$}is', $url)){
             $url .= '.git';
         }
         parent::__construct($url);
