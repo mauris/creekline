@@ -30,7 +30,7 @@ abstract class UrlRepository implements RepositoryInterface {
     public static function factory($url){
         if(substr($url,0, 6) == 'git://'){ // git
             return new Git($url);
-        }elseif(substr($url,0, 7) == 'http://'){ // HTTP
+        }elseif(substr($url,0, 7) == 'http://' || substr($url,0, 8) == 'https://'){ // HTTP
             $parts = parse_url($url);
             if($parts['host'] == 'github.com' || $parts['host'] = 'www.github.com'){
                 return new Github($url);
