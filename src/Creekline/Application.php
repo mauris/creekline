@@ -14,6 +14,7 @@ use Creekline\IO\Console;
 use Packfire\Options\OptionSet;
 use Packfire\FuelBlade\Container;
 use Creekline\Config\Config;
+use Creekline\Repository\UrlRepository;
 
 /**
  * Application class
@@ -48,33 +49,46 @@ class Application {
     }
     
     public function run(){
-        $container = $this->container;
-        $act = 'help';
-        
-        $container['options']->addIndex(1, function($value)use(&$act, $container){
-            $act = 'skip';
-        }, '[Optional] Sets the repository to check');
-        
-        $container['options']->add('c|config=', function($value)use(&$act, $container){
-            $act = 'manager';
-            $container['config'] = Config::load($value);
-        }, 'Set the configuration');
-        
-        $container['options']->add('h|help', function()use(&$act){
+        try{
+            $container = $this->container;
             $act = 'help';
-        }, 'Shows this help message');
-        
-        $container['options']->parse($this->args);
-        
-        switch($act){
-            case 'skip':
-                break;
-            case 'manager':
-                break;
-            case 'help':
-            default:
-                $container['io']->write($container['options']->help());
-                break;
+            $manager = new PackageManager($container['io']);
+            $container['manager'] = $manager;
+
+            $container['options']->addIndex(1, array($this, 'checkRepository'), '[Optional] Sets the repository to check');
+
+            $container['options']->add('c|config=', function($value)use(&$act, $container){
+                $act = 'manager';
+                $container['config'] = Config::load($value);
+            }, 'Set the configuration');
+
+            $container['options']->add('h|help', function()use(&$act){
+                $act = 'help';
+            }, 'Shows this help message');
+
+            $container['options']->parse($this->args);
+
+            switch($act){
+                case 'skip':
+                    break;
+                case 'manager':
+                    break;
+                case 'help':
+                default:
+                    $container['io']->write($container['options']->help());
+                    break;
+            }
+        }catch(Exception $ex){
+            
+        }
+    }
+    
+    public function checkRepository($identifier){
+        $repository = UrlRepository::factory($identifier);
+        if($repository){
+            $this->container['manager']->run($repository);
+        }else{
+            throw new \RuntimeException("Unknown repository given");
         }
     }
     
