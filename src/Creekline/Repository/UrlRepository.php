@@ -26,5 +26,21 @@ abstract class UrlRepository implements RepositoryInterface {
     protected $url;
     
     public abstract function __construct($url);
+    
+    public static function factory($url){
+        if(substr($url,0, 6) == 'git://'){ // git
+            return new Git($url);
+        }elseif(substr($url,0, 7) == 'http://'){ // HTTP
+            $parts = parse_url($url);
+            if($parts['host'] == 'github.com' || $parts['host'] = 'www.github.com'){
+                return new Github($url);
+            }elseif($parts['host'] == 'bitbucket.org' || $parts['host'] = 'www.bitbucket.org'){
+                return new Github($url);
+            }
+        }elseif(preg_match('{^(.+)\@(.+)\:(.+)$}is', $url)){ // SSH scheme
+            return new Git($url);
+        }
+        return null;
+    }
 
 }
