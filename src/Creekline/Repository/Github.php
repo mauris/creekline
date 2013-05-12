@@ -25,8 +25,8 @@ class Github extends Git {
     
     public function __construct($url) {
         if(preg_match('{^[a-z0-9\-]+\/[a-z0-9\-]+$}is', $url)){
-            $url = 'https://github.com/' . $url . '.git';
-        }elseif(preg_match('{^https*\:\/\/github\.com\/^[a-z0-9\-]+\/[a-z0-9\-]+$}is', $url)){
+            $url = 'git@github.com:' . $url . '.git';
+        }elseif(preg_match('{^https{0,1}://(www\.){0,1}github\.com/[a-z0-9\-\.]+/[a-z0-9\-\.]+(?<!\.git)$}is', $url)){
             $url .= '.git';
         }
         $this->url = $url;
