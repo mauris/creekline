@@ -35,7 +35,7 @@ abstract class UrlRepository implements RepositoryInterface {
             if($parts['host'] == 'github.com' || $parts['host'] = 'www.github.com'){
                 return new Github($url);
             }elseif($parts['host'] == 'bitbucket.org' || $parts['host'] = 'www.bitbucket.org'){
-                return new Github($url);
+                return new BitBucketGit($url);
             }
         }elseif(preg_match('{^(.+)\@(.+)\:(.+)$}is', $url)){ // SSH scheme
             return new Git($url);
