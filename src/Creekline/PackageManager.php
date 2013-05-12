@@ -55,7 +55,7 @@ class PackageManager {
         mkdir($folder);
         chdir($folder);
         
-        $this->io->overwrite('Downloading ' . $repository->identifier(), false);
+        $this->io->overwrite('Downloading ' . $repository->identifier() . ' ... ', false);
         $repository->fetch();
         
         $this->io->overwrite('Downloading Composer ... ', false);
