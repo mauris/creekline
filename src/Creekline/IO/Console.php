@@ -36,12 +36,13 @@ class Console implements IOInterface {
     }
 
     public function overwrite($message, $newline = true, $size = null) {
-        $size = $this->lastMessage;
-        $this->write("\x0D", false);
-        if($size && $size > strlen($message)){
-            $this->write(str_repeat(' ', $size), false);
-            $this->write("\x0D", false);
+        if(!$size){
+            $size = $this->lastMessage;
         }
+        $backspace = str_repeat("\x08", $size);
+        $this->write($backspace, false);
+        $this->write(str_repeat(" ", $size), false);
+        $this->write($backspace, false);
         $this->write($message, $newline);
     }
 
