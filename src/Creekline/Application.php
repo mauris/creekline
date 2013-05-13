@@ -33,6 +33,8 @@ class Application {
     
     protected $args;
     
+    protected $act = 'help';
+    
     public function __construct($args){
         $container = new Container();
         $this->container = $container;
@@ -49,29 +51,25 @@ class Application {
     }
     
     public function run(){
-        try{
+        try{            
             $container = $this->container;
-            $act = 'help';
             $manager = new PackageManager($container['io']);
             $container['manager'] = $manager;
 
             $container['options']->addIndex(1, array($this, 'checkRepository'), '[Optional] Sets the repository to check');
 
-            $container['options']->add('c|config=', function($value)use(&$act, $container){
-                $act = 'manager';
-                $container['config'] = Config::load($value);
-            }, 'Set the configuration');
+            $container['options']->add('c|config=', array($this, 'loadConfig'), 'Set the configuration');
 
-            $container['options']->add('h|help', function()use(&$act){
-                $act = 'help';
-            }, 'Shows this help message');
+            $container['options']->add('h|help', function(){}, 'Shows this help message');
 
             $container['options']->parse($this->args);
 
-            switch($act){
+            switch($this->act){
                 case 'skip':
                     break;
                 case 'manager':
+                    $manager = new PackageManager($this->container['io']);
+                    $manager->run(new Repository\Git('https://github.com/packfire/concrete.git'));
                     break;
                 case 'help':
                 default:
@@ -83,7 +81,13 @@ class Application {
         }
     }
     
+    public function loadConfig($file){
+        $this->act = 'manager';
+        $this->container['config'] = Config::load($file);
+    }
+    
     public function checkRepository($identifier){
+        $this->act = 'skip';
         $repository = UrlRepository::factory($identifier);
         if($repository){
             $this->container['manager']->run($repository);
