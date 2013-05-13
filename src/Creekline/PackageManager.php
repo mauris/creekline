@@ -31,7 +31,9 @@ class PackageManager {
      * @var \Creekline\IO\IOInterface
      * @since 1.0.0
      */
-    private $io;
+    protected $io;
+    
+    protected $counter = 0;
     
     /**
      * Create a new PackageManager
@@ -48,6 +50,10 @@ class PackageManager {
      * @since 1.0.0
      */
     public function run(RepositoryInterface $repository){
+        ++$this->counter;
+        
+        $this->io->write('  [' . $this->counter . '] ', false);
+        
         $this->io->write('Preparing for ' . $repository->identifier(), false);
         
         $cwd = getcwd();
