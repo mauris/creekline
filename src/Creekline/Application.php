@@ -14,7 +14,7 @@ use Creekline\IO\Console;
 use Packfire\Options\OptionSet;
 use Packfire\FuelBlade\Container;
 use Creekline\Config\Config;
-use Creekline\Repository\UrlRepository;
+use Creekline\Repository\RepositoryFactory;
 
 /**
  * Application class
@@ -32,6 +32,8 @@ class Application {
     protected $container;
     
     protected $args;
+    
+    protected $type = 'git';
     
     protected $act = 'help';
     
@@ -58,6 +60,8 @@ class Application {
 
             $container['options']->addIndex(1, array($this, 'checkRepository'), '[Optional] Sets the repository to check');
 
+            $container['options']->add('t|type=', array($this, 'setType'), 'Set the default repository type. Defaults to Git.');
+
             $container['options']->add('c|config=', array($this, 'loadConfig'), 'Set the configuration');
 
             $container['options']->add('h|help', function(){}, 'Shows this help message');
@@ -81,6 +85,10 @@ class Application {
         }
     }
     
+    public function setType($type){
+        $this->type = $type;
+    }
+    
     public function loadConfig($file){
         $this->act = 'manager';
         $this->container['config'] = Config::load($file);
@@ -88,7 +96,7 @@ class Application {
     
     public function checkRepository($identifier){
         $this->act = 'skip';
-        $repository = UrlRepository::factory($identifier);
+        $repository = RepositoryFactory::byType($this->type, $identifier);
         if($repository){
             $this->container['manager']->run($repository);
         }else{
