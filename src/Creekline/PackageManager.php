@@ -73,7 +73,7 @@ class PackageManager {
         $this->io->overwrite('Installing project dependencies ... ', false);
         $components = $composer->install();
         
-        $this->io->overwrite('Checking ' . $repository->identifier() . ' ... ', false);        
+        $this->io->overwrite('Checking ' . $repository->identifier() . ' for updates ... ', false);        
         $upgrades = $composer->update();
         
         chdir($cwd);
