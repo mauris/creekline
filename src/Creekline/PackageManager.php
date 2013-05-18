@@ -80,14 +80,18 @@ class PackageManager {
         FolderUtility::clearFolder($folder);
         
         $this->io->write("Done");
-        foreach($components as $name => $version){
-            $this->io->write('    ' . $name . ' ' . $version, false);
-            if(isset($upgrades[$name])){
-                $this->io->write(' => ' . $upgrades[$name], false);
+        if($components){
+            foreach($components as $name => $version){
+                $this->io->write('      ' . $name . ' ' . $version, false);
+                if(isset($upgrades[$name])){
+                    $this->io->write(' => ' . $upgrades[$name], false);
+                }
+                $this->io->write('');
             }
-            $this->io->write('');
+        }else{
+            $this->io->write('    No dependencies found.');
         }
-        
+        $this->io->write('');
     }
     
 }
