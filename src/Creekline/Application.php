@@ -58,8 +58,6 @@ class Application {
             $manager = new PackageManager($container['io']);
             $container['manager'] = $manager;
 
-            $container['options']->addIndex(1, array($this, 'checkRepository'), '[Optional] Sets the repository to check');
-
             $container['options']->add('t|type=', array($this, 'setType'), 'Set the default repository type. Defaults to Git.');
 
             $container['options']->add('c|config=', array($this, 'loadConfig'), 'Set the configuration');

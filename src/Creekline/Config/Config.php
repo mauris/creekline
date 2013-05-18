@@ -37,7 +37,7 @@ class Config {
     }
     
     protected function sort($data){
-        if($data->get('projects')){
+        if($data && $data->get('projects')){
             $this->projects = $data->get('projects');
         }
     }
