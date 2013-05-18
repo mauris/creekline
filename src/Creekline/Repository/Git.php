@@ -29,10 +29,6 @@ class Git extends UrlRepository implements IConsumer {
     
     protected $processor = '\\Symfony\\Component\\Process\\Process';
     
-    public function __construct($url) {
-        $this->url = $url;
-    }
-    
     public function identifier(){
         return $this->url;
     }

@@ -25,7 +25,9 @@ abstract class UrlRepository implements RepositoryInterface {
     
     protected $url;
     
-    public abstract function __construct($url);
+    public function __construct($url){
+        $this->url = $url;
+    }
     
     public static function factory($url){
         if(substr($url,0, 6) == 'git://'){ // git
