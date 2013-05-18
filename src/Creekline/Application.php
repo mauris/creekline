@@ -71,7 +71,13 @@ class Application {
                     break;
                 case 'manager':
                     $manager = new PackageManager($this->container['io']);
-                    $manager->run(new Repository\Git('https://github.com/packfire/concrete.git'));
+                    $projects = $container['config']->projects();
+                    foreach($projects as $project){
+                        $repository = RepositoryFactory::byType(isset($project['type']) ? $project['type'] : $this->type, $project['id']);
+                        if($repository){
+                            $this->container['manager']->run($repository);
+                        }
+                    }
                     break;
                 case 'help':
                 default:
