@@ -60,7 +60,7 @@ class Composer implements IConsumer {
     }
     
     public function install(){
-        $cmd = $this->command . ' install';
+        $cmd = $this->command . ' install --prefer-source';
         $proc = $this->processor;
         $process = new $proc($cmd);
         $errCode = $process->run();
@@ -72,7 +72,7 @@ class Composer implements IConsumer {
     }
     
     public function update(){
-        $cmd = $this->command . ' update';
+        $cmd = $this->command . ' update --prefer-source';
         $proc = $this->processor;
         $process = new $proc($cmd);
         $errCode = $process->run();
