@@ -13,7 +13,7 @@ namespace Creekline\Repository;
 /**
  * RepositoryInterface interface
  *
- * The manager for downloading and running tests for a package
+ * The interface for repositories
  *
  * @author Sam-Mauris Yong / mauris@hotmail.sg
  * @copyright Copyright (c) 2013, Sam-Mauris Yong
@@ -22,6 +22,8 @@ namespace Creekline\Repository;
  * @since 1.0.0
  */
 interface RepositoryInterface {
+    
+    public function __construct($identifier);
     
     public function identifier();
     
