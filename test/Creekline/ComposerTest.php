@@ -49,10 +49,13 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
      */
     public function testDownloadFileMissing()
     {
+        $cwd = getcwd();
+        chdir(sys_get_temp_dir());
         $c = new Container();
         $c['processor'] = '\\Creekline\\MockProcess\\Success';
         call_user_func($this->object, $c);
         $this->object->download();
+        chdir($cwd);
     }
 
     /**
