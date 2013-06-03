@@ -21,26 +21,31 @@ namespace Creekline\IO;
  * @package Creekline\IO
  * @since 1.0.0
  */
-class Blackhole implements IOInterface {
+class Blackhole implements IOInterface
+{
     
-    public function ask($question, $responses) {
+    public function ask($question, $responses)
+    {
         return '';
     }
 
-    public function confirm($question) {
+    public function confirm($question)
+    {
         return true;
     }
 
-    public function overwrite($message, $newline = true, $size = null) {
+    public function overwrite($message, $newline = true, $size = null)
+    {
         
     }
 
-    public function read() {
+    public function read()
+    {
         return '';
     }
 
-    public function write($message, $newline = true) {
+    public function write($message, $newline = true)
+    {
         
     }
-    
 }

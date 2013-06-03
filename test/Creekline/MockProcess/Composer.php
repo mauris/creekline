@@ -1,19 +1,23 @@
 <?php
 namespace Creekline\MockProcess;
 
-class Composer {
+class Composer
+{
     
     private $cmd;
     
-    public function __construct($cmd){
+    public function __construct($cmd)
+    {
         $this->cmd = $cmd;
     }
     
-    public function run(){
+    public function run()
+    {
         return 0;
     }
     
-    public function getOutput(){
+    public function getOutput()
+    {
         return <<<EOF
 Loading composer repositories with package information
 Updating dependencies (including require-dev)
@@ -29,5 +33,4 @@ Writing lock file
 Generating autoload files
 EOF;
     }
-    
 }

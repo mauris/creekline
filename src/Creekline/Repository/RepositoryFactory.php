@@ -21,10 +21,12 @@ namespace Creekline\Repository;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class RepositoryFactory {
+class RepositoryFactory
+{
     
-    public static function byType($type, $identifier){
-        switch($type){
+    public static function byType($type, $identifier)
+    {
+        switch ($type) {
             case 'git':
                 return new Git($identifier);
                 break;
@@ -33,5 +35,4 @@ class RepositoryFactory {
                 break;
         }
     }
-    
 }

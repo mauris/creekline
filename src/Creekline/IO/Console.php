@@ -23,20 +23,24 @@ use Clio\Console as Clio;
  * @package Creekline\IO
  * @since 1.0.0
  */
-class Console implements IOInterface {
+class Console implements IOInterface
+{
     
     private $lastMessage;
     
-    public function ask($question, $responses) {
+    public function ask($question, $responses)
+    {
         return Clio::select($question, $responses);
     }
 
-    public function confirm($question) {
+    public function confirm($question)
+    {
         return Clio::confirm($question);
     }
 
-    public function overwrite($message, $newline = true, $size = null) {
-        if(!$size){
+    public function overwrite($message, $newline = true, $size = null)
+    {
+        if (!$size) {
             $size = $this->lastMessage;
         }
         $backspace = str_repeat("\x08", $size);
@@ -46,13 +50,14 @@ class Console implements IOInterface {
         $this->write($message, $newline);
     }
 
-    public function read() {
+    public function read()
+    {
         return Clio::input();
     }
 
-    public function write($message, $newline = true) {
+    public function write($message, $newline = true)
+    {
         $message = $message . ($newline ? "\n": '');
         $this->lastMessage = Clio::stdout($message);
     }
-    
 }

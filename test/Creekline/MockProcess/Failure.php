@@ -1,20 +1,23 @@
 <?php
 namespace Creekline\MockProcess;
 
-class Failure {
+class Failure
+{
     
     private $cmd;
     
-    public function __construct($cmd){
+    public function __construct($cmd)
+    {
         $this->cmd = $cmd;
     }
     
-    public function run(){
+    public function run()
+    {
         return 1;
     }
     
-    public function getOutput(){
+    public function getOutput()
+    {
         return "";
     }
-    
 }

@@ -23,7 +23,8 @@ use Packfire\Config\ConfigFactory;
  * @package Creekline\Config
  * @since 1.0.0
  */
-class Config {
+class Config
+{
     
     private $projects;
     
@@ -32,23 +33,26 @@ class Config {
      * @param \Packfire\Config\IConfig $data The configuration
      * @since 1.0.0
      */
-    public function __construct($data){
+    public function __construct($data)
+    {
         $this->sort($data);
     }
     
-    protected function sort($data){
-        if($data && $data->get('projects')){
+    protected function sort($data)
+    {
+        if ($data && $data->get('projects')) {
             $this->projects = $data->get('projects');
         }
     }
     
-    public function projects(){
+    public function projects()
+    {
         return $this->projects;
     }
     
-    public static function load($file){
+    public static function load($file)
+    {
         $factory = new ConfigFactory();
         return new self($factory->load($file));
     }
-    
 }

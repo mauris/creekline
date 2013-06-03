@@ -27,21 +27,23 @@ use Creekline\Repository\RepositoryFactory;
  * @package Creekline
  * @since 1.0.0
  */
-class Application {
+class Application
+{
     
     protected $container;
-    
+
     protected $args;
     
     protected $type = 'git';
     
     protected $act = 'help';
     
-    public function __construct($args){
+    public function __construct($args)
+    {
         $container = new Container();
         $this->container = $container;
         
-        $io = new Console;
+        $io = new Console();
         $this->container['io'] = $io;
         
         $io->write("Creekline composer dependencies checker\n");
@@ -51,9 +53,10 @@ class Application {
         
         $this->args = $args;
     }
-    
-    public function run(){
-        try{            
+
+    public function run()
+    {
+        try {
             $container = $this->container;
             $manager = new PackageManager($container['io']);
             $container['manager'] = $manager;
@@ -62,7 +65,12 @@ class Application {
 
             $container['options']->add('c|config=', array($this, 'loadConfig'), 'Set the configuration');
 
-            $container['options']->add('h|help', function(){}, 'Shows this help message');
+            $container['options']->add(
+                'h|help',
+                function () {
+                },
+                'Shows this help message'
+            );
 
             $container['options']->parse($this->args);
 
@@ -72,9 +80,9 @@ class Application {
                 case 'manager':
                     $manager = new PackageManager($this->container['io']);
                     $projects = $container['config']->projects();
-                    foreach($projects as $project){
+                    foreach ($projects as $project) {
                         $repository = RepositoryFactory::byType(isset($project['type']) ? $project['type'] : $this->type, $project['id']);
-                        if($repository){
+                        if ($repository) {
                             $this->container['manager']->run($repository);
                         }
                     }
@@ -84,28 +92,30 @@ class Application {
                     $container['io']->write($container['options']->help());
                     break;
             }
-        }catch(Exception $ex){
+        } catch (Exception $ex) {
             
         }
     }
     
-    public function setType($type){
+    public function setType($type)
+    {
         $this->type = $type;
     }
     
-    public function loadConfig($file){
+    public function loadConfig($file)
+    {
         $this->act = 'manager';
         $this->container['config'] = Config::load($file);
     }
     
-    public function checkRepository($identifier){
+    public function checkRepository($identifier)
+    {
         $this->act = 'skip';
         $repository = RepositoryFactory::byType($this->type, $identifier);
-        if($repository){
+        if ($repository) {
             $this->container['manager']->run($repository);
-        }else{
+        } else {
             throw new \RuntimeException("Unknown repository given");
         }
     }
-    
 }

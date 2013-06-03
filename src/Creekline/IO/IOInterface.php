@@ -21,7 +21,8 @@ namespace Creekline\IO;
  * @package Creekline\IO
  * @since 1.0.0
  */
-interface IOInterface {
+interface IOInterface
+{
     
     public function write($message, $newline = true);
     
@@ -32,5 +33,4 @@ interface IOInterface {
     public function ask($question, $responses);
     
     public function confirm($question);
-    
 }

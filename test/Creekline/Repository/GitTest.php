@@ -92,5 +92,4 @@ class GitTest extends \PHPUnit_Framework_TestCase
         call_user_func($this->object, $c);
         $this->object->fetch();
     }
-    
 }

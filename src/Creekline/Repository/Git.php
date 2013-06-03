@@ -23,17 +23,20 @@ use Packfire\FuelBlade\IConsumer;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class Git extends UrlRepository implements IConsumer {
+class Git extends UrlRepository implements IConsumer
+{
     
     protected $branch = 'master';
     
     protected $processor = '\\Symfony\\Component\\Process\\Process';
     
-    public function identifier(){
+    public function identifier()
+    {
         return $this->url;
     }
 
-    public function fetch() {
+    public function fetch()
+    {
         $cmd = 'git init && git remote add origin "' . $this->url . '" && git pull origin "' . $this->branch . '"';
         $proc = $this->processor;
         $process = new $proc($cmd);
@@ -42,16 +45,16 @@ class Git extends UrlRepository implements IConsumer {
         }
     }
     
-    public function __invoke($c) {
-        if(isset($c['url'])){
+    public function __invoke($c)
+    {
+        if (isset($c['url'])) {
             $this->url = $c['url'];
         }
-        if(isset($c['branch'])){
+        if (isset($c['branch'])) {
             $this->branch = $c['branch'];
         }
-        if(isset($c['processor'])){
+        if (isset($c['processor'])) {
             $this->processor = $c['processor'];
         }
     }
-    
 }

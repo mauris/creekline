@@ -80,10 +80,13 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
         $c['processor'] = '\\Creekline\\MockProcess\\Composer';
         call_user_func($this->object, $c);
         $result = $this->object->install();
-        $this->assertEquals(array(
-            'symfony/process' => 'v2.2.1',
-            'symfony/finder' => 'v2.2.1'
-            ), $result);
+        $this->assertEquals(
+            array(
+                'symfony/process' => 'v2.2.1',
+                'symfony/finder' => 'v2.2.1'
+            ),
+            $result
+        );
     }
 
     /**
@@ -107,10 +110,13 @@ class ComposerTest extends \PHPUnit_Framework_TestCase
         $c['processor'] = '\\Creekline\\MockProcess\\Composer';
         call_user_func($this->object, $c);
         $result = $this->object->update();
-        $this->assertEquals(array(
-            'symfony/process' => 'v2.2.1',
-            'symfony/finder' => 'v2.2.1'
-            ), $result);
+        $this->assertEquals(
+            array(
+                'symfony/process' => 'v2.2.1',
+                'symfony/finder' => 'v2.2.1'
+            ),
+            $result
+        );
     }
 
     /**

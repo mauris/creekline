@@ -21,15 +21,16 @@ namespace Creekline\Repository;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class BitbucketGit extends Git {
+class BitbucketGit extends Git
+{
     
-    public function __construct($url) {
-        if(preg_match('{^[a-z0-9\-\.]+\/[a-z0-9\-\.]+$}is', $url)){
+    public function __construct($url)
+    {
+        if (preg_match('{^[a-z0-9\-\.]+\/[a-z0-9\-\.]+$}is', $url)) {
             $url = 'git@bitbucket.org:' . $url . '.git';
-        }elseif(preg_match('{^https{0,1}://.*bitbucket\.org/[a-z0-9\-\.]+/[a-z0-9\-\.]+(?<!\.git)$}is', $url)){
+        } elseif (preg_match('{^https{0,1}://.*bitbucket\.org/[a-z0-9\-\.]+/[a-z0-9\-\.]+(?<!\.git)$}is', $url)) {
             $url .= '.git';
         }
         parent::__construct($url);
     }
-    
 }

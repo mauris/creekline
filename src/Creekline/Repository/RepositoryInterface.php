@@ -21,12 +21,12 @@ namespace Creekline\Repository;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-interface RepositoryInterface {
+interface RepositoryInterface
+{
     
     public function __construct($identifier);
     
     public function identifier();
     
     public function fetch();
-    
 }

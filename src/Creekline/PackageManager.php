@@ -24,7 +24,8 @@ use Creekline\Repository\RepositoryInterface;
  * @package Creekline
  * @since 1.0.0
  */
-class PackageManager {
+class PackageManager
+{
     
     /**
      * The IO channel to read/write to
@@ -40,7 +41,8 @@ class PackageManager {
      * @param \Creekline\IO\IOInterface $io The IO interface to input/output to
      * @since 1.0.0
      */
-    public function __construct(IOInterface $io){
+    public function __construct(IOInterface $io)
+    {
         $this->io = $io;
     }
     
@@ -49,7 +51,8 @@ class PackageManager {
      * @param \Creekline\Repository\RepositoryInterface $repository The repository to check
      * @since 1.0.0
      */
-    public function run(RepositoryInterface $repository){
+    public function run(RepositoryInterface $repository)
+    {
         ++$this->counter;
         
         $this->io->write('  [' . $this->counter . '] ', false);
@@ -67,31 +70,30 @@ class PackageManager {
         $this->io->overwrite('Downloading Composer ... ', false);
         $composer = new Composer();
         $result = $composer->detect();
-        if(!$result){
+        if (!$result) {
             $composer->download();
         }
         $this->io->overwrite('Installing project dependencies ... ', false);
         $components = $composer->install();
         
-        $this->io->overwrite('Checking ' . $repository->identifier() . ' for updates ... ', false);        
+        $this->io->overwrite('Checking ' . $repository->identifier() . ' for updates ... ', false);
         $upgrades = $composer->update();
         
         chdir($cwd);
         FolderUtility::clearFolder($folder);
         
         $this->io->write("Done");
-        if($components){
-            foreach($components as $name => $version){
+        if ($components) {
+            foreach ($components as $name => $version) {
                 $this->io->write('      ' . $name . '  (' . $version . ')', false);
-                if(isset($upgrades[$name])){
+                if (isset($upgrades[$name])) {
                     $this->io->write(' => [' . $upgrades[$name] . ']', false);
                 }
                 $this->io->write('');
             }
-        }else{
+        } else {
             $this->io->write('    No dependencies found.');
         }
         $this->io->write('');
     }
-    
 }
