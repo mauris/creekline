@@ -72,7 +72,7 @@ class Composer implements IConsumer {
     }
     
     public function update(){
-        $cmd = $this->command . ' update --prefer-source';
+        $cmd = $this->command . ' update';
         $proc = $this->processor;
         $process = new $proc($cmd);
         $errCode = $process->run();
