@@ -13,4 +13,4 @@
 Phar::mapPhar('creekline.phar');
 require 'phar://creekline.phar/bin/creekline';
 
-__HALT_COMPILER();
+__halt_compiler();
