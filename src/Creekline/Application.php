@@ -81,7 +81,11 @@ class Application
                     $manager = new PackageManager($this->container['io']);
                     $projects = $container['config']->projects();
                     foreach ($projects as $project) {
-                        $repository = RepositoryFactory::byType(isset($project['type']) ? $project['type'] : $this->type, $project['id']);
+                        if (is_string($project)) {
+                            $repository = RepositoryFactory::byType($this->type, $project);
+                        } else {
+                            $repository = RepositoryFactory::byType(isset($project['type']) ? $project['type'] : $this->type, $project['id']);
+                        }
                         if ($repository) {
                             $this->container['manager']->run($repository);
                         }
@@ -106,6 +110,9 @@ class Application
     {
         $this->act = 'manager';
         $this->container['config'] = Config::load($file);
+        if (!$this->container['config']->projects()) {
+            throw new \RuntimeException("Config file not provided");
+        }
     }
     
     public function checkRepository($identifier)
