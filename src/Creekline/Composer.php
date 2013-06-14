@@ -10,7 +10,7 @@
 
 namespace Creekline;
 
-use Packfire\FuelBlade\IConsumer;
+use Packfire\FuelBlade\ConsumerInterface;
 
 /**
  * Composer class
@@ -23,7 +23,7 @@ use Packfire\FuelBlade\IConsumer;
  * @package Creekline
  * @since 1.0.0
  */
-class Composer implements IConsumer
+class Composer implements ConsumerInterface
 {
     
     protected $processor = '\\Symfony\\Component\\Process\\Process';
@@ -109,7 +109,7 @@ class Composer implements IConsumer
    
     /**
      * FuelBlade consumer method
-     * @param \Packfire\FuelBlade\IContainer $c The container to get dependencies
+     * @param \Packfire\FuelBlade\ContainerInterface $c The container to get dependencies
      * @since 1.0.0
      * @codeCoverageIgnore
      */

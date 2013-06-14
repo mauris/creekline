@@ -10,7 +10,7 @@
 
 namespace Creekline\Repository;
 
-use Packfire\FuelBlade\IConsumer;
+use Packfire\FuelBlade\ConsumerInterface;
 
 /**
  * Git class
@@ -23,7 +23,7 @@ use Packfire\FuelBlade\IConsumer;
  * @package Creekline\Repository
  * @since 1.0.0
  */
-class Git extends UrlRepository implements IConsumer
+class Git extends UrlRepository implements ConsumerInterface
 {
     
     protected $branch = 'master';
