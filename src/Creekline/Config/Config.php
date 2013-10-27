@@ -25,9 +25,8 @@ use Packfire\Config\ConfigFactory;
  */
 class Config
 {
-    
     private $projects;
-    
+
     /**
      * Create a new Config
      * @param \Packfire\Config\IConfig $data The configuration
@@ -37,19 +36,19 @@ class Config
     {
         $this->sort($data);
     }
-    
+
     protected function sort($data)
     {
         if ($data && $data->get('projects')) {
             $this->projects = $data->get('projects');
         }
     }
-    
+
     public function projects()
     {
         return $this->projects;
     }
-    
+
     public static function load($file)
     {
         $factory = new ConfigFactory();

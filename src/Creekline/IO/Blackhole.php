@@ -23,7 +23,6 @@ namespace Creekline\IO;
  */
 class Blackhole implements IOInterface
 {
-    
     public function ask($question, $responses)
     {
         return '';
@@ -36,7 +35,6 @@ class Blackhole implements IOInterface
 
     public function overwrite($message, $newline = true, $size = null)
     {
-        
     }
 
     public function read()
@@ -46,6 +44,5 @@ class Blackhole implements IOInterface
 
     public function write($message, $newline = true)
     {
-        
     }
 }

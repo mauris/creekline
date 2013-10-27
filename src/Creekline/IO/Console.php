@@ -25,9 +25,8 @@ use Clio\Console as Clio;
  */
 class Console implements IOInterface
 {
-    
     private $lastMessage;
-    
+
     public function ask($question, $responses)
     {
         return Clio::select($question, $responses);

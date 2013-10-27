@@ -25,11 +25,10 @@ use Packfire\FuelBlade\ConsumerInterface;
  */
 class Composer implements ConsumerInterface
 {
-    
     protected $processor = '\\Symfony\\Component\\Process\\Process';
-    
+
     protected $command = 'php composer.phar';
-    
+
     public function detect()
     {
         $cmd = 'composer --version';
@@ -41,7 +40,7 @@ class Composer implements ConsumerInterface
         }
         return $result;
     }
-    
+
     public function download()
     {
         $cache = sys_get_temp_dir() . '/composer.phar';
@@ -61,7 +60,7 @@ class Composer implements ConsumerInterface
             copy('composer.phar', $cache);
         }
     }
-    
+
     public function install()
     {
         $cmd = $this->command . ' install --prefer-source';
@@ -74,7 +73,7 @@ class Composer implements ConsumerInterface
         }
         return $this->processOutput($output);
     }
-    
+
     public function update()
     {
         $cmd = $this->command . ' update';
@@ -87,7 +86,7 @@ class Composer implements ConsumerInterface
         }
         return $this->processOutput($output);
     }
-    
+
     /**
      * Process Composer output into an array of dependencies and versions
      * @param string $output The Composer output to process
@@ -106,7 +105,7 @@ class Composer implements ConsumerInterface
         }
         return $result;
     }
-   
+
     /**
      * FuelBlade consumer method
      * @param \Packfire\FuelBlade\ContainerInterface $c The container to get dependencies

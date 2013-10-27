@@ -23,7 +23,6 @@ namespace Creekline\Repository;
  */
 class RepositoryFactory
 {
-    
     public static function byType($type, $identifier)
     {
         switch ($type) {

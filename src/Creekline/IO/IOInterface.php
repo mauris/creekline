@@ -23,14 +23,13 @@ namespace Creekline\IO;
  */
 interface IOInterface
 {
-    
     public function write($message, $newline = true);
-    
+
     public function overwrite($message, $newline = true, $size = null);
-    
+
     public function read();
-    
+
     public function ask($question, $responses);
-    
+
     public function confirm($question);
 }

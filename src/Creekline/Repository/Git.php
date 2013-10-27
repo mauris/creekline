@@ -25,11 +25,10 @@ use Packfire\FuelBlade\ConsumerInterface;
  */
 class Git extends UrlRepository implements ConsumerInterface
 {
-    
     protected $branch = 'master';
-    
+
     protected $processor = '\\Symfony\\Component\\Process\\Process';
-    
+
     public function identifier()
     {
         return $this->url;
@@ -44,7 +43,7 @@ class Git extends UrlRepository implements ConsumerInterface
             throw new \RuntimeException('Failed to fetch from "' . $this->url . '". Output: ' . $process->getOutput());
         }
     }
-    
+
     public function __invoke($c)
     {
         if (isset($c['url'])) {

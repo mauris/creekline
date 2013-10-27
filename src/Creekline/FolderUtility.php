@@ -23,7 +23,6 @@ namespace Creekline;
  */
 class FolderUtility
 {
-    
     public static function randomFolderName()
     {
         do {
@@ -32,7 +31,7 @@ class FolderUtility
         } while (is_dir($folder));
         return $folder;
     }
-    
+
     public static function clearFolder($folder)
     {
         if (!is_dir($folder) || is_link($folder)) {

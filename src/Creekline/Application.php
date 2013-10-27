@@ -29,28 +29,27 @@ use Creekline\Repository\RepositoryFactory;
  */
 class Application
 {
-    
     protected $container;
 
     protected $args;
-    
+
     protected $type = 'git';
-    
+
     protected $act = 'help';
-    
+
     public function __construct($args)
     {
         $container = new Container();
         $this->container = $container;
-        
+
         $io = new Console();
         $this->container['io'] = $io;
-        
+
         $io->write("Creekline composer dependencies checker\n");
-        
+
         $options = new OptionSet();
         $container['options'] = $options;
-        
+
         $this->args = $args;
     }
 
@@ -97,15 +96,15 @@ class Application
                     break;
             }
         } catch (Exception $ex) {
-            
+
         }
     }
-    
+
     public function setType($type)
     {
         $this->type = $type;
     }
-    
+
     public function loadConfig($file)
     {
         $this->act = 'manager';
@@ -114,7 +113,7 @@ class Application
             throw new \RuntimeException("Config file not provided");
         }
     }
-    
+
     public function checkRepository($identifier)
     {
         $this->act = 'skip';

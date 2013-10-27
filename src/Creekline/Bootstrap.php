@@ -23,7 +23,6 @@ namespace Creekline;
  */
 class Bootstrap
 {
-
     private static function acquire($file)
     {
         if (is_file($file)) {

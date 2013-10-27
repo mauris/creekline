@@ -26,16 +26,15 @@ use Creekline\Repository\RepositoryInterface;
  */
 class PackageManager
 {
-    
     /**
      * The IO channel to read/write to
      * @var \Creekline\IO\IOInterface
      * @since 1.0.0
      */
     protected $io;
-    
+
     protected $counter = 0;
-    
+
     /**
      * Create a new PackageManager
      * @param \Creekline\IO\IOInterface $io The IO interface to input/output to
@@ -45,7 +44,7 @@ class PackageManager
     {
         $this->io = $io;
     }
-    
+
     /**
      * Perform update checking for a repository
      * @param \Creekline\Repository\RepositoryInterface $repository The repository to check
@@ -54,19 +53,19 @@ class PackageManager
     public function run(RepositoryInterface $repository)
     {
         ++$this->counter;
-        
+
         $this->io->write('  [' . $this->counter . '] ', false);
-        
+
         $this->io->write('Preparing for ' . $repository->identifier(), false);
-        
+
         $cwd = getcwd();
         $folder = sys_get_temp_dir() . '/' . FolderUtility::randomFolderName();
         mkdir($folder);
         chdir($folder);
-        
+
         $this->io->overwrite('Downloading ' . $repository->identifier() . ' ... ', false);
         $repository->fetch();
-        
+
         $this->io->overwrite('Downloading Composer ... ', false);
         $composer = new Composer();
         $result = $composer->detect();
@@ -75,17 +74,17 @@ class PackageManager
         }
         $this->io->overwrite('Installing project dependencies ... ', false);
         $components = $composer->install();
-        
+
         $this->io->overwrite('Checking ' . $repository->identifier() . ' for updates ... ', false);
         $upgrades = $composer->update();
-        
+
         chdir($cwd);
         FolderUtility::clearFolder($folder);
-        
+
         $this->io->write("Done");
         if ($components) {
             foreach ($components as $name => $version) {
-                $this->io->write('      ' . $name . '  (' . $version . ')', false);
+                $this->io->write('      ' . $name . "\t\t(" . $version . ')', false);
                 if (isset($upgrades[$name])) {
                     $this->io->write(' => [' . $upgrades[$name] . ']', false);
                 }

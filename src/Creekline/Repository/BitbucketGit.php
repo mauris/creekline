@@ -23,7 +23,6 @@ namespace Creekline\Repository;
  */
 class BitbucketGit extends Git
 {
-    
     public function __construct($url)
     {
         if (preg_match('{^[a-z0-9\-\.]+\/[a-z0-9\-\.]+$}is', $url)) {
