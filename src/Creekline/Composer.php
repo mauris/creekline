@@ -97,7 +97,7 @@ class Composer implements ConsumerInterface
     {
         $result = array();
         $entries = array();
-        $matches = preg_match_all('{\- Installing (.*) v*\((.*)\)}isU', $output, $entries, PREG_SET_ORDER);
+        $matches = preg_match_all('{\- Installing (.*) \(v*(.*)\)}isU', $output, $entries, PREG_SET_ORDER);
         if ($matches) {
             foreach ($entries as $entry) {
                 $result[$entry[1]] = $entry[2];
