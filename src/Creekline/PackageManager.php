@@ -84,7 +84,7 @@ class PackageManager
         $this->io->write("Done");
         if ($components) {
             foreach ($components as $name => $version) {
-                $this->io->write('      ' . $name . "\t\t(" . $version . ')', false);
+                $this->io->write('      ' . str_pad($name, 40, ' ') . '(' . $version . ')', false);
                 if (isset($upgrades[$name])) {
                     $this->io->write(' => [' . $upgrades[$name] . ']', false);
                 }
