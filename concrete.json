@@ -1,5 +1,6 @@
 {
 	"output": "creekline.phar",
+	"alias": "creekline.phar",
 	"stub": "res/stub.php",
 	"build":[
 		{
