@@ -219,16 +219,16 @@
         },
         {
             "name": "packfire/fuelblade",
-            "version": "1.1.1",
+            "version": "1.1.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/packfire/fuelblade.git",
-                "reference": "1.1.1"
+                "reference": "29d9f3ab73b6df9940875d01213db21ce81ac614"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/packfire/fuelblade/zipball/1.1.1",
-                "reference": "1.1.1",
+                "url": "https://api.github.com/repos/packfire/fuelblade/zipball/29d9f3ab73b6df9940875d01213db21ce81ac614",
+                "reference": "29d9f3ab73b6df9940875d01213db21ce81ac614",
                 "shasum": ""
             },
             "require": {
@@ -259,7 +259,7 @@
                 "di",
                 "ioc"
             ],
-            "time": "2013-06-13 07:49:52"
+            "time": "2013-11-02 15:11:29"
         },
         {
             "name": "packfire/options",
@@ -355,17 +355,17 @@
         },
         {
             "name": "symfony/process",
-            "version": "v2.2.9",
+            "version": "v2.2.10",
             "target-dir": "Symfony/Component/Process",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Process.git",
-                "reference": "c7e4d13ad1bc77ef82087f384c7ed7348553c096"
+                "reference": "f9c619629af68da7c4b2a010ab0a1b732e2f9548"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/c7e4d13ad1bc77ef82087f384c7ed7348553c096",
-                "reference": "c7e4d13ad1bc77ef82087f384c7ed7348553c096",
+                "url": "https://api.github.com/repos/symfony/Process/zipball/f9c619629af68da7c4b2a010ab0a1b732e2f9548",
+                "reference": "f9c619629af68da7c4b2a010ab0a1b732e2f9548",
                 "shasum": ""
             },
             "require": {
@@ -398,7 +398,7 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "http://symfony.com",
-            "time": "2013-10-09 20:52:58"
+            "time": "2013-10-21 11:56:16"
         }
     ],
     "packages-dev": [
